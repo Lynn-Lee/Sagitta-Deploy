@@ -87,14 +87,14 @@ gzip -t "backups/sagitta_control_${timestamp}.sql.gz"
 
 ## 4. 标准升级流程
 
-假设旧版本目录为 `/opt/sagitta-control/Sagitta-Control-v<old_version>`，新版本目录为 `/opt/sagitta-control/Sagitta-Control-v2.2.3`。
+假设旧版本目录为 `/opt/sagitta-control/Sagitta-Control-v<old_version>`，新版本目录为 `/opt/sagitta-control/Sagitta-Control-v2.3.0`。
 
 解压新版本并复制旧配置：
 
 ```bash
 cd /opt/sagitta-control
-unzip Sagitta-Control-v2.2.3.zip
-cd Sagitta-Control-v2.2.3
+unzip Sagitta-Control-v2.3.0.zip
+cd Sagitta-Control-v2.3.0
 cp /opt/sagitta-control/Sagitta-Control-v<old_version>/.env .env
 ```
 
@@ -107,7 +107,7 @@ grep -E '^(SECRET_KEY|LICENSE_CUSTOMER_ID|LICENSE_DEPLOYMENT_ID|BACKEND_PORT|FRO
 执行升级：
 
 ```bash
-./upgrade.sh 2.2.3
+./upgrade.sh 2.3.0
 ```
 
 升级脚本会执行：
@@ -174,7 +174,7 @@ docker compose logs --tail=200 frontend > frontend-upgrade-error.log
 停止新版本服务：
 
 ```bash
-cd /opt/sagitta-control/Sagitta-Control-v2.2.3
+cd /opt/sagitta-control/Sagitta-Control-v2.3.0
 docker compose down
 ```
 

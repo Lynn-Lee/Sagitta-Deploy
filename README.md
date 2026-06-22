@@ -1,4 +1,4 @@
-# Sagitta Control v2.2.3
+# Sagitta Control v2.3.0
 
 Sagitta Control 是面向企业数据库治理场景的一体化管控平台，帮助企业把数据库实例、SQL 变更、在线查询、权限申请、数据字典、数据脱敏、运行观测、数据归档和审计日志统一到一个可审批、可追踪、可运营的工作台中。
 
@@ -41,9 +41,9 @@ Sagitta Control 是面向企业数据库治理场景的一体化管控平台，�
 
 ## 当前版本
 
-- 产品版本：`2.2.3`
-- 后端镜像：`ghcr.io/lynn-lee/sagitta-control-backend:2.2.3`
-- 前端镜像：`ghcr.io/lynn-lee/sagitta-control-frontend:2.2.3`
+- 产品版本：`2.3.0`
+- 后端镜像：`ghcr.io/lynn-lee/sagitta-control-backend:2.3.0`
+- 前端镜像：`ghcr.io/lynn-lee/sagitta-control-frontend:2.3.0`
 - 镜像标签：固定版本标签，不使用 `latest`
 
 Sagitta Control 支持试用和正式授权，部署完成后可在产品内完成激活或续期。
@@ -74,11 +74,11 @@ Sagitta Control 的客户部署包已经包含 `docker-compose.yml`、`.env.exam
 在 Linux 服务器上下载完整部署包：
 
 ```bash
-wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.2.3/Sagitta-Control-v2.2.3.zip
-wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.2.3/Sagitta-Control-v2.2.3.zip.sha256
-sha256sum -c Sagitta-Control-v2.2.3.zip.sha256
-unzip Sagitta-Control-v2.2.3.zip
-cd Sagitta-Control-v2.2.3
+wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.3.0/Sagitta-Control-v2.3.0.zip
+wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.3.0/Sagitta-Control-v2.3.0.zip.sha256
+sha256sum -c Sagitta-Control-v2.3.0.zip.sha256
+unzip Sagitta-Control-v2.3.0.zip
+cd Sagitta-Control-v2.3.0
 ```
 
 准备 `.env`。`prepare-go-live-env.sh` 会保留已有正式值，并为占位符生成强随机值：
@@ -157,9 +157,9 @@ helm upgrade --install sagitta-control helm/sagitta-control \
 升级前先下载新版本部署包并校验 sha256，然后把旧部署目录的 `.env` 复制到新目录。不要重新生成 `SECRET_KEY` 或 `LICENSE_DEPLOYMENT_ID`。
 
 ```bash
-cd Sagitta-Control-v2.2.3
+cd Sagitta-Control-v2.3.0
 cp /path/to/old/Sagitta-Control-v<old_version>/.env .env
-./upgrade.sh 2.2.3
+./upgrade.sh 2.3.0
 ```
 
 升级脚本会更新镜像标签、拉取固定版本镜像、备份 PostgreSQL、执行 Alembic 迁移、重启服务并检查前后端健康状态。升级前请阅读 [运维升级指南](docs/operations-upgrade.md)，确认维护窗口、备份文件和回滚路径都已准备好。
@@ -168,9 +168,9 @@ cp /path/to/old/Sagitta-Control-v<old_version>/.env .env
 
 每个 Release 提供：
 
-- `Sagitta-Control-v2.2.3.zip`
-- `Sagitta-Control-v2.2.3.zip.sha256`
-- `Sagitta-Control-v2.2.3.zip.sig.json`
+- `Sagitta-Control-v2.3.0.zip`
+- `Sagitta-Control-v2.3.0.zip.sha256`
+- `Sagitta-Control-v2.3.0.zip.sig.json`
 - 后端镜像 CycloneDX SBOM、sha256 和签名 bundle
 - 前端镜像 CycloneDX SBOM、sha256 和签名 bundle
 

@@ -38,8 +38,8 @@ curl --version
 
 服务器需要能访问：
 
-- 镜像：`ghcr.io/lynn-lee/sagitta-control-backend:2.2.3`
-- 镜像：`ghcr.io/lynn-lee/sagitta-control-frontend:2.2.3`
+- 镜像：`ghcr.io/lynn-lee/sagitta-control-backend:2.3.0`
+- 镜像：`ghcr.io/lynn-lee/sagitta-control-frontend:2.3.0`
 - 授权服务：`https://license.loveai.asia`
 
 默认端口：
@@ -65,11 +65,11 @@ curl --version
 在服务器上执行：
 
 ```bash
-wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.2.3/Sagitta-Control-v2.2.3.zip
-wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.2.3/Sagitta-Control-v2.2.3.zip.sha256
-sha256sum -c Sagitta-Control-v2.2.3.zip.sha256
-unzip Sagitta-Control-v2.2.3.zip
-cd Sagitta-Control-v2.2.3
+wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.3.0/Sagitta-Control-v2.3.0.zip
+wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.3.0/Sagitta-Control-v2.3.0.zip.sha256
+sha256sum -c Sagitta-Control-v2.3.0.zip.sha256
+unzip Sagitta-Control-v2.3.0.zip
+cd Sagitta-Control-v2.3.0
 ```
 
 成功信号：
@@ -280,8 +280,8 @@ curl -fsS https://<backend-health-url>
 如果服务器无法访问 GHCR，请使用 Sagitta Control 支持团队提供的镜像包：
 
 ```bash
-docker load < sagitta-control-backend-2.2.3.tar
-docker load < sagitta-control-frontend-2.2.3.tar
+docker load < sagitta-control-backend-2.3.0.tar
+docker load < sagitta-control-frontend-2.3.0.tar
 docker compose up -d
 ```
 
@@ -292,7 +292,7 @@ docker compose up -d
 ### 容器拉取失败
 
 - 检查服务器是否能访问 GHCR。
-- 确认镜像版本为 `2.2.3`。
+- 确认镜像版本为 `2.3.0`。
 - 检查代理、DNS、防火墙和客户侧镜像仓库策略。
 - 离线环境请先导入镜像 tar 包，再执行 `docker compose up -d`。
 
