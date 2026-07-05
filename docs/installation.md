@@ -38,8 +38,8 @@ curl --version
 
 服务器需要能访问：
 
-- 镜像：`ghcr.io/lynn-lee/sagitta-control-backend:2.3.5`
-- 镜像：`ghcr.io/lynn-lee/sagitta-control-frontend:2.3.5`
+- 镜像：`ghcr.io/lynn-lee/sagitta-control-backend:3.0.0`
+- 镜像：`ghcr.io/lynn-lee/sagitta-control-frontend:3.0.0`
 - 授权服务：`https://license.loveai.asia`
 
 默认端口：
@@ -65,11 +65,11 @@ curl --version
 在服务器上执行：
 
 ```bash
-wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.3.5/Sagitta-Control-v2.3.5.zip
-wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v2.3.5/Sagitta-Control-v2.3.5.zip.sha256
-sha256sum -c Sagitta-Control-v2.3.5.zip.sha256
-unzip Sagitta-Control-v2.3.5.zip
-cd Sagitta-Control-v2.3.5
+wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v3.0.0/Sagitta-Control-v3.0.0.zip
+wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v3.0.0/Sagitta-Control-v3.0.0.zip.sha256
+sha256sum -c Sagitta-Control-v3.0.0.zip.sha256
+unzip Sagitta-Control-v3.0.0.zip
+cd Sagitta-Control-v3.0.0
 ```
 
 成功信号：
@@ -261,6 +261,7 @@ helm upgrade --install sagitta-control helm/sagitta-control \
 Helm 上线前请确认：
 
 - `values-prod.yaml` 中的域名、Ingress、证书、存储类、外部 PostgreSQL 和外部 Redis 已替换为客户现场值。
+- Chart 的 `values.schema.json` 会在 `app.env=production` 时拒绝默认 `SECRET_KEY`、PostgreSQL 和 Redis 弱密码；安装前必须通过 `--set`、独立 values 文件或客户侧 Secret 管理系统注入随机值。
 - 密钥、数据库密码、License 配置和证书通过客户侧 Secret 管理系统注入，不提交到 Git。
 - PostgreSQL、Redis 或外部托管服务的备份策略已经确认。
 - 后端、Worker、Beat、前端 Pod 的资源限制符合客户规范。
@@ -280,8 +281,8 @@ curl -fsS https://<backend-health-url>
 如果服务器无法访问 GHCR，请使用 Sagitta Control 支持团队提供的镜像包：
 
 ```bash
-docker load < sagitta-control-backend-2.3.5.tar
-docker load < sagitta-control-frontend-2.3.5.tar
+docker load < sagitta-control-backend-3.0.0.tar
+docker load < sagitta-control-frontend-3.0.0.tar
 docker compose up -d
 ```
 
@@ -292,7 +293,7 @@ docker compose up -d
 ### 容器拉取失败
 
 - 检查服务器是否能访问 GHCR。
-- 确认镜像版本为 `2.3.5`。
+- 确认镜像版本为 `3.0.0`。
 - 检查代理、DNS、防火墙和客户侧镜像仓库策略。
 - 离线环境请先导入镜像 tar 包，再执行 `docker compose up -d`。
 
