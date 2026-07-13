@@ -1,4 +1,4 @@
-# Sagitta Control 客户部署包
+# Sagitta Control 用户部署包
 
 Sagitta Control 是面向企业数据库安全管控场景的统一平台。此部署包包含固定版本 Docker Compose、Helm Chart、上线检查脚本、升级脚本、产品截图和标准文档，不包含后端或前端源码。
 
