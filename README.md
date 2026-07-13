@@ -2,12 +2,26 @@
 
 Sagitta Control 是面向企业数据库安全管控场景的统一平台。此部署包包含固定版本 Docker Compose、Helm Chart、上线检查脚本、升级脚本、产品截图和标准文档，不包含后端或前端源码。
 
+## 核心页面截图
+
+![数据看板](screenshots/02-dashboard-query.png)
+
+![SQL 工单列表](screenshots/06-workflow-list.png)
+
+![SQL 工单提交](screenshots/07-workflow-submit.png)
+
+![在线查询工作台](screenshots/09-query-workbench.png)
+
+![观测中心实例总览](screenshots/12-monitor.png)
+
+![SQL 洞察](screenshots/12-monitor-sql-insight.png)
+
 ![交付与支持](screenshots/23-commercial-support.png)
 
 ## 文档入口
 
 - [安装部署手册](docs/installation_deployment.md)：服务器准备、Docker Compose / Helm 部署、授权激活和上线检查。
-- [产品使用手册](docs/user_manual.md)：平台初始化、权限模型、SQL 工单、在线查询、观测诊断、归档和审计操作。
+- [产品使用手册](docs/user_manual.md)：从部署成功后的初始化配置开始，指导完成实例接入、权限治理、SQL 工单、在线查询、观测诊断、归档和审计操作。
 - [运维升级手册](docs/operations_upgrade.md)：日常巡检、备份、升级、回滚、日志诊断和安全基线。
 
 ## 快速部署
