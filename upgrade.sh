@@ -2,7 +2,7 @@
 
 set -Eeuo pipefail
 
-TARGET_VERSION="${1:-3.0.0}"
+TARGET_VERSION="${1:-3.1.0}"
 BACKUP_DIR="${BACKUP_DIR:-./backups}"
 BACKEND_HEALTH_URL="${BACKEND_HEALTH_URL:-http://127.0.0.1:8000/health}"
 FRONTEND_HEALTH_URL="${FRONTEND_HEALTH_URL:-http://127.0.0.1/health}"

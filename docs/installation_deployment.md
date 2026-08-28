@@ -38,8 +38,8 @@ curl --version
 
 服务器需要能访问：
 
-- 镜像：`ghcr.io/lynn-lee/sagitta-control-backend:3.0.0`
-- 镜像：`ghcr.io/lynn-lee/sagitta-control-frontend:3.0.0`
+- 镜像：`ghcr.io/lynn-lee/sagitta-control-backend:3.1.0`
+- 镜像：`ghcr.io/lynn-lee/sagitta-control-frontend:3.1.0`
 - 授权服务：`https://license.loveai.asia`
 
 默认端口：
@@ -65,11 +65,11 @@ curl --version
 在服务器上执行：
 
 ```bash
-wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v3.0.0/Sagitta-Control-v3.0.0.zip
-wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v3.0.0/Sagitta-Control-v3.0.0.zip.sha256
-sha256sum -c Sagitta-Control-v3.0.0.zip.sha256
-unzip Sagitta-Control-v3.0.0.zip
-cd Sagitta-Control-v3.0.0
+wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v3.1.0/Sagitta-Control-v3.1.0.zip
+wget https://github.com/Lynn-Lee/Sagitta-Deploy/releases/download/v3.1.0/Sagitta-Control-v3.1.0.zip.sha256
+sha256sum -c Sagitta-Control-v3.1.0.zip.sha256
+unzip Sagitta-Control-v3.1.0.zip
+cd Sagitta-Control-v3.1.0
 ```
 
 成功信号：
@@ -90,7 +90,7 @@ cp .env.example .env
 
 脚本会做三件事：
 
-- 为 `POSTGRES_PASSWORD`、`REDIS_PASSWORD`、`SECRET_KEY` 和 `LICENSE_DEPLOYMENT_ID` 生成强随机值。
+- 为 `POSTGRES_PASSWORD`、`REDIS_PASSWORD`、`SECRET_KEY`、`FERNET_KEY` 和 `LICENSE_DEPLOYMENT_ID` 生成强随机值。
 - 将 `LICENSE_CUSTOMER_ID` 写成传入的客户 ID。
 - 保留已有正式值；除非使用 `--force`，不会覆盖非占位符配置。
 
@@ -100,7 +100,8 @@ cp .env.example .env
 |---|---|---|
 | `POSTGRES_PASSWORD` | 是 | 内置 PostgreSQL 密码，不能是 `CHANGE_ME`。 |
 | `REDIS_PASSWORD` | 是 | 内置 Redis 密码，不能是 `CHANGE_ME`。 |
-| `SECRET_KEY` | 是 | 生产密钥，首次部署后不要修改；修改会影响加密数据。 |
+| `SECRET_KEY` | 是 | JWT 签名密钥，首次部署后不要修改；生产环境不得使用默认值。 |
+| `FERNET_KEY` | 是 | 字段级加密密钥，必须与 `SECRET_KEY` 不同；首次部署后不要修改，修改会影响已加密数据。 |
 | `LICENSE_CUSTOMER_ID` | 是 | 客户 ID，应与授权中心记录一致。 |
 | `LICENSE_SERVER_URL` | 是 | 默认 `https://license.loveai.asia`。 |
 | `LICENSE_DEPLOYMENT_ID` | 是 | 稳定部署 ID，升级、迁移和重启时必须保持不变。 |
@@ -116,7 +117,7 @@ grep -n 'CHANGE_ME\|^LICENSE_CUSTOMER_ID=$' .env || true
 
 如果命令输出了未处理的关键配置，请先修正再启动服务。
 
-重要：升级、迁移和重启时必须保留同一份 `.env`，尤其是 `SECRET_KEY` 和 `LICENSE_DEPLOYMENT_ID`。不要在升级时重新执行 `prepare-go-live-env.sh --force`。
+重要：升级、迁移和重启时必须保留同一份 `.env`，尤其是 `SECRET_KEY`、`FERNET_KEY` 和 `LICENSE_DEPLOYMENT_ID`。不要在升级时重新执行 `prepare-go-live-env.sh --force`。
 
 ## 5. Docker Compose 启动
 
@@ -263,7 +264,7 @@ helm upgrade --install sagitta-control helm/sagitta-control \
 Helm 上线前请确认：
 
 - `values-prod.yaml` 中的域名、Ingress、证书、存储类、外部 PostgreSQL 和外部 Redis 已替换为客户现场值。
-- Chart 的 `values.schema.json` 会在 `app.env=production` 时拒绝默认 `SECRET_KEY`、PostgreSQL 和 Redis 弱密码；安装前必须通过 `--set`、独立 values 文件或客户侧 Secret 管理系统注入随机值。
+- Chart 的 `values.schema.json` 会在 `app.env=production` 时拒绝默认 `SECRET_KEY`、`FERNET_KEY`、PostgreSQL 和 Redis 弱密码；安装前必须通过 `--set`、独立 values 文件或客户侧 Secret 管理系统注入随机值。
 - 密钥、数据库密码、License 配置和证书通过客户侧 Secret 管理系统注入，不提交到 Git。
 - PostgreSQL、Redis 或外部托管服务的备份策略已经确认。
 - 后端、Worker、Beat、前端 Pod 的资源限制符合客户规范。
@@ -283,8 +284,8 @@ curl -fsS https://<backend-health-url>
 如果服务器无法访问 GHCR，请使用 Sagitta Control 支持团队提供的镜像包：
 
 ```bash
-docker load < sagitta-control-backend-3.0.0.tar
-docker load < sagitta-control-frontend-3.0.0.tar
+docker load < sagitta-control-backend-3.1.0.tar
+docker load < sagitta-control-frontend-3.1.0.tar
 docker compose up -d
 ```
 
@@ -295,7 +296,7 @@ docker compose up -d
 ### 容器拉取失败
 
 - 检查服务器是否能访问 GHCR。
-- 确认镜像版本为 `3.0.0`。
+- 确认镜像版本为 `3.1.0`。
 - 检查代理、DNS、防火墙和客户侧镜像仓库策略。
 - 离线环境请先导入镜像 tar 包，再执行 `docker compose up -d`。
 
