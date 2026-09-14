@@ -1,9 +1,9 @@
 {
   "payload": {
     "artifact": "Sagitta-Control-v3.1.0.zip",
-    "issued_at": "2026-09-14T07:59:57.071306+00:00",
+    "issued_at": "2026-09-14T14:10:28.852924+00:00",
     "product": "sagitta-control",
-    "sha256": "96c764bff5a7e648943acc8d261877817e271e8c40a4383be822a1add66fa0e1"
+    "sha256": "4e6835ee014635fd8cda5da44668cc7f3d344f02baea76b3b5e58c4ac4286ae9"
   },
-  "signature": "SM8QFFL69QLcbObYTIWgBqp0fJZ3MYxpRgsKzvlNdccM_TjCkKfCmoL4GR8jjGWYzAWc_tZsedKEXJ_YGRwDCA"
+  "signature": "L1zEyNXFy0sFBjGba4Kfa7YD2jTo7RJ4xFhKeTFDluqqfF9V-SDXWmBW6uJ_r3H2EFHX-Vi9ee62GH9bYHXUCQ"
 }
